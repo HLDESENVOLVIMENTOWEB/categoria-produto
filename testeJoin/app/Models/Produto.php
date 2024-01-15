@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 
 class Produto extends Model
 {
@@ -13,13 +15,15 @@ class Produto extends Model
         'nome_produto',
         'valor_produto',
         'id_categoria_produto',
-        'data_cadastro'
+        'data_cadastro',
+        'categoria_produtos'
     ];
 
     public $timestamps = false;
 
-    public function category()
+
+    public function categoriaProduto()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(CategoriaProduto::class, 'id_categoria_produto', 'id_categoria_planejameto');
     }
 }

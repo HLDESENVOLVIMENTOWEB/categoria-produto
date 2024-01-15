@@ -34,15 +34,15 @@ class ProdutoService
         return $this->produtoRepository->create($data);
     }
 
-    public function update(array $data): Produto
+    public function update(array $data, $id): Produto
     {
         // Perform any business logic or data manipulation here
-        $this->produtoRepository->update($data);
+        $this->produtoRepository->update($data, $id);
         return $produto;
     }
 
-    public function delete(): bool
+    public function delete($id): bool
     {
-        return $this->produtoRepository->delete();
+        return $this->produtoRepository->delete($id);
     }
 }

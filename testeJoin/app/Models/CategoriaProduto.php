@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CategoriaProduto extends Model
 {
@@ -12,7 +13,8 @@ class CategoriaProduto extends Model
      * @var array
      */
     protected $fillable = [
-        'nome_categoria',
+        'id_categoria_planejameto',
+        'nome_categoria'
         // include other fields that should be mass-assignable
     ];
 
@@ -20,8 +22,9 @@ class CategoriaProduto extends Model
 
     // Rest of the model...
 
-    public function products()
+
+    public function produtos()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Produto::class, 'id_categoria_produto', 'id_categoria_planejameto');
     }
 }

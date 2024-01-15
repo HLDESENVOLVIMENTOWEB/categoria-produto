@@ -40,8 +40,8 @@ class CategoriaProdutoService
         return $categoriaProduto;
     }
 
-    public function delete(): bool
+    public function delete($id): bool
     {
-        return $this->categoriaProdutoRepository->delete();
+        return $this->categoriaProdutoRepository->delete($id);
     }
 }

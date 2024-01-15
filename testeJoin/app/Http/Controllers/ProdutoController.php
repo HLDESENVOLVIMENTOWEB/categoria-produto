@@ -56,7 +56,7 @@ class ProdutoController extends Controller
         ]);
 
 
-        $produto = $this->produtoService->update($id, $validatedData);
+        $produto = $this->produtoService->update($validatedData, $id);
 
         if (!$produto) {
             return response()->json(['message' => 'Product not found'], 404);

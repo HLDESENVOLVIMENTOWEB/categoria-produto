@@ -17,7 +17,7 @@ class CategoriaProdutoRepository implements CategoriaProdutoRepositoryInterface
 
     public function findById($id): ?CategoriaProduto
     {
-        return CategoriaProduto::find($id);
+        return CategoriaProduto::with('produtos')->where('id_categoria_planejameto', $id)->first();
     }
 
     public function create(array $data): CategoriaProduto
@@ -25,14 +25,19 @@ class CategoriaProdutoRepository implements CategoriaProdutoRepositoryInterface
         return CategoriaProduto::create($data);
     }
 
-    public function update(CategoriaProduto $categoriaProduto, array $data): CategoriaProduto
+    public function update($id, array $data): CategoriaProduto
     {
-        $categoriaProduto->update($data);
-        return $categoriaProduto;
+        $categoriaProduto = CategoriaProduto::where('id_categoria_planejameto', $id)->first();
+        $categoriaProduto->nome_categoria = 'New Name';
+        return $categoriaProduto->save();
+
     }
 
-    public function delete(CategoriaProduto $categoriaProduto): bool
+    public function delete($id): bool
     {
+
+        $categoriaProduto = CategoriaProduto::where('id_categoria_planejameto', $id)->first();
+
         return $categoriaProduto->delete();
     }
 }

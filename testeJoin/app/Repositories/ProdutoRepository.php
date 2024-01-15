@@ -12,12 +12,12 @@ class ProdutoRepository implements ProdutoRepositoryInterface
 {
     public function getAll(): Collection
     {
-        return Produto::all();
+        return Produto::with('categoriaProduto')->get();
     }
 
     public function findById($id): ?Produto
     {
-        return Produto::find($id);
+        return Produto::with('categoriaProduto')->find($id);
     }
 
     public function create(array $data): Produto
@@ -25,14 +25,21 @@ class ProdutoRepository implements ProdutoRepositoryInterface
         return Produto::create($data);
     }
 
-    public function update(Produto $produto, array $data): Produto
+    public function update(array $data, $id): Produto
     {
-        $produto->update($data);
-        return $produto;
+        $produto = Produto::find($id);
+        $produto->name = 'New Name';
+        $produto->email = 'newemail@example.com';
+        return $user->save();
+
     }
 
-    public function delete(Produto $produto): bool
+    public function delete($id): bool
     {
+        $produto = Produto::find($id);
+
         return $produto->delete();
+
+
     }
 }
