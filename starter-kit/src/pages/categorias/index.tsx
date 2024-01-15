@@ -4,11 +4,13 @@ import React, { useState, useEffect } from 'react'
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
 import CardContent from '@mui/material/CardContent'
-import Table from 'src/@core/components/table/categorias/Table'
 import { getCategoryProducts } from 'src/services/CategoryProductService'
+import TableCategoria from 'src/@core/components/table/categorias/Table'
+import FormModal from 'src/@core/layouts/components/modal/criar-categoria'
 
 const Categorias = () => {
   const [categories, setCategories] = useState([])
+  const [loading, setLoaging] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -21,15 +23,22 @@ const Categorias = () => {
     }
 
     fetchData()
-  }, [])
+  }, [loading])
 
   return (
     <Grid container spacing={6}>
       <Grid item xs={12}>
         <Card>
           <CardContent>
-            <h1>Categorias</h1>
-            <Table data={categories} />
+            <Grid container spacing={6}>
+              <Grid item xs={10}>
+                <h1>Categorias</h1>
+              </Grid>
+              <Grid item xs={2}>
+                <FormModal setLoaging={setLoaging}/>
+              </Grid>
+            </Grid>
+            <TableCategoria data={categories} />
           </CardContent>
         </Card>
       </Grid>
