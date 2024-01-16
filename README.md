@@ -14,3 +14,8 @@
  <a href="#licenc-a">Fotos</a> • 
  <a href="#autor">Autor</a>
 </p>
+
+
+<h4 align="center"> 
+	🚧  Projeto necessita da instalação do: Docker, Docker Composer, npm/node   🚧
+</h4>
