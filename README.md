@@ -1,5 +1,6 @@
+<h1 align="center">
 <img align="center" src="https://jointecnologia.com.br/wp-content/themes/theme-bones-master/library/images/logo.png"/>
-
+</h1>h1>
 <h1 align="center">
     <a href="https://pt-br.reactjs.org/">🔗 React</a>
 </h1>
