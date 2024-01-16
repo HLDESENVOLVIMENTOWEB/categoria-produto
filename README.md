@@ -46,7 +46,7 @@
 
 <div id="tecnologias">
 	<h4 align="center"> 
-	[O front é necessario npm install e depois npm run dev](https://we.tl/t-Zzccs9Q1h0)
+	(https://we.tl/t-Zzccs9Q1h0)
       </h4>
 </div>
 
