@@ -1,9 +1,9 @@
-<img src="https://jointecnologia.com.br/wp-content/themes/theme-bones-master/library/images/logo.png"/>
+<img align="center" src="https://jointecnologia.com.br/wp-content/themes/theme-bones-master/library/images/logo.png"/>
 
 <h1 align="center">
     <a href="https://pt-br.reactjs.org/">🔗 React</a>
 </h1>
-<p align="center">🚀 lib para construir interfaces do usuário com componentes reutilizáveis</p>
+<p align="center">🚀 Teste técnico cadastro categoria/ produto </p>
 
 
 <p align="center">
