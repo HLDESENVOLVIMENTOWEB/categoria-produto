@@ -8,7 +8,7 @@
 
 
 <h2 align="center"> 
-	🚧  O projeto pode ser implementado melhorias como identidade visual, testes unitarios e melhor componetização   🚧
+	🚧  O projeto pode ser implementado melhorias como identidade visual, testes unitarios e melhor componetização e criado swagger   🚧
 </h2>
  
 
@@ -46,7 +46,7 @@
 
 <div id="tecnologias">
 	<h4 align="center"> 
-	(https://we.tl/t-Zzccs9Q1h0)
+	Postman: (https://we.tl/t-Zzccs9Q1h0)
       </h4>
 </div>
 
