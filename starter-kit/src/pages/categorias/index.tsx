@@ -9,27 +9,20 @@ import TableCategoria from 'src/@core/layouts/components/table/categorias/Table'
 import FormModal from 'src/@core/layouts/components/modal/criar-categoria'
 import FallbackSpinner from 'src/@core/components/spinner'
 import SuccessAlert from 'src/@core/layouts/components/alert/SuccessAlert'
+import ErrorAlert from 'src/@core/layouts/components/alert/ErrorAlert'
+import { showErrorAlertDTO, showSuccessAlertDTO } from 'src/types'
 
 
-interface showSuccessAlertDTO {
-  status: boolean
-  msg: string
-}
-
-interface showErrorAlertDTO {
-  status: boolean
-  msg: string
-}
 const Categorias = () => {
   const [categories, setCategories] = useState([])
   const [loading, setLoaging] = useState(false);
 
-  const [showSuccessAlert, setShowSuccessAlert] = useState<showErrorAlertDTO>({
+  const [showSuccessAlert, setShowSuccessAlert] = useState<showSuccessAlertDTO>({
     status: false,
     msg: ''
   });
 
-  const [showErrorAlert, setShowErrorAlert] = useState<showSuccessAlertDTO>({
+  const [showErrorAlert, setShowErrorAlert] = useState<showErrorAlertDTO>({
     status: false,
     msg: ''
   });
@@ -57,7 +50,7 @@ const Categorias = () => {
                 <SuccessAlert message={showSuccessAlert.msg} duration={3000} />
               )}
               {showErrorAlert.status && (
-                <SuccessAlert message={showErrorAlert.msg} duration={3000} />
+                <ErrorAlert message={showErrorAlert.msg} duration={3000} />
             )}
             <Grid container spacing={6}>
               <Grid item xs={10}>

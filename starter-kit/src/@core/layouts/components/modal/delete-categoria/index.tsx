@@ -27,20 +27,21 @@ const FormModalCategoriaDelete = ({id, setLoaging, setShowSuccessAlert, setShowE
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
     setLoaging(true)
     try {
-      deleteCategoryProducts(id)
-      setShowSuccessAlert({
+      await deleteCategoryProducts(id)
+      await setShowSuccessAlert({
         status: true,
         msg: 'deletado com sucesso'
       })
-      setTimeout(() => setShowSuccessAlert({
+     await  setTimeout(() => setShowSuccessAlert({
         status: false,
         msg: ''
       }), 3000);
     } catch (error) {
+      console.log(1)
       setShowErrorAlert({
         status: true,
         msg: 'Error ao deletar prodtuo ou existe produto relacionado a essa categoria'

@@ -9,16 +9,10 @@ import { getProducts } from 'src/services/ProductService'
 import TableProdutos from 'src/@core/layouts/components/table/produtos/Table'
 import FormModalProduto from 'src/@core/layouts/components/modal/criar-produto'
 import SuccessAlert from 'src/@core/layouts/components/alert/SuccessAlert'
+import ErrorAlert from 'src/@core/layouts/components/alert/ErrorAlert'
+import { showErrorAlertDTO, showSuccessAlertDTO } from 'src/types'
 
-interface showSuccessAlertDTO {
-  status: boolean
-  msg: string
-}
 
-interface showErrorAlertDTO {
-  status: boolean
-  msg: string
-}
 
 const Produtos = () => {
   const [products, setProducts] = useState([])
@@ -29,7 +23,7 @@ const Produtos = () => {
     msg: ''
   });
 
-  const [showErrorAlert, setShowErrorAlert] = useState<showSuccessAlertDTO>({
+  const [showErrorAlert, setShowErrorAlert] = useState<showErrorAlertDTO>({
     status: false,
     msg: ''
   });
@@ -57,7 +51,7 @@ const Produtos = () => {
                 <SuccessAlert message={showSuccessAlert.msg} duration={3000} />
             )}
              {showErrorAlert.status && (
-                <SuccessAlert message={showErrorAlert.msg} duration={3000} />
+                <ErrorAlert message={showErrorAlert.msg} duration={3000} />
             )}
            <Grid container spacing={6}>
               <Grid item xs={10}>

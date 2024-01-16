@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Alert from '@mui/material/Alert';
 
-interface SuccessAlertProps {
+interface ErrorAlertAlertProps {
     message: string;
     duration: number;
 }
 
-const SuccessAlert: React.FC<SuccessAlertProps> = ({ message, duration }) => {
+const ErrorAlert: React.FC<ErrorAlertAlertProps> = ({ message, duration }) => {
     const [open, setOpen] = useState<boolean>(true);
 
     useEffect(() => {
@@ -26,4 +26,4 @@ const SuccessAlert: React.FC<SuccessAlertProps> = ({ message, duration }) => {
     );
 };
 
-export default SuccessAlert;
+export default ErrorAlert;

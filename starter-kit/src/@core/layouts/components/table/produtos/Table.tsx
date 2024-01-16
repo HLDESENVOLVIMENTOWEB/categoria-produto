@@ -26,9 +26,10 @@ interface TableProps {
   data: Item[]
   setLoaging: any
   setShowSuccessAlert: any
+  setShowErrorAlert: any
 }
 
-function TableProdutos({ data, setLoaging, setShowSuccessAlert }: TableProps) {
+function TableProdutos({ data, setLoaging, setShowSuccessAlert, setShowErrorAlert }: TableProps) {
   return (
     <TableContainer component={Paper}>
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -56,8 +57,8 @@ function TableProdutos({ data, setLoaging, setShowSuccessAlert }: TableProps) {
             <TableCell component="th" scope="row">
               {row.categoria_produto.nome_categoria}
             </TableCell>
-            <TableCell><FormModalEditarProduto setShowSuccessAlert={setShowSuccessAlert}  id={row.id} setLoaging={setLoaging}/></TableCell>
-            <TableCell><FormModalProdutoDelete setShowSuccessAlert={setShowSuccessAlert} id={row.id} setLoaging={setLoaging} /></TableCell>
+            <TableCell><FormModalEditarProduto setShowErrorAlert={setShowErrorAlert} setShowSuccessAlert={setShowSuccessAlert}  id={row.id} setLoaging={setLoaging}/></TableCell>
+            <TableCell><FormModalProdutoDelete setShowErrorAlert={setShowErrorAlert} setShowSuccessAlert={setShowSuccessAlert} id={row.id} setLoaging={setLoaging} /></TableCell>
           </TableRow>
         ))}
       </TableBody>

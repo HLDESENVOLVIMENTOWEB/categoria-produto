@@ -1,17 +1,13 @@
 // src/services/ProductService.ts
 import axios from 'axios'
+import { BASE_URL } from 'src/configs/api'
+import { ProdutoDTO } from 'src/types'
 
-interface ProdutoDTO {
-  nome_produto: string,
-  valor_produto: string,
-  id_categoria_produto: number | undefined,
-  id?: number
-}
 
 
 export const getProducts = async () => {
   try {
-    const response = await axios.get(`http://127.0.0.1:8000/api/produtos`)
+    const response = await axios.get(`${BASE_URL}produtos`)
 
     return response.data
   } catch (error) {
@@ -21,7 +17,7 @@ export const getProducts = async () => {
 
 export const getProductsId = async (id: number) => {
   try {
-    const response = await axios.get(`http://127.0.0.1:8000/api/produtos/${id}`)
+    const response = await axios.get(`${BASE_URL}produtos/${id}`)
 
     return response.data
   } catch (error) {
@@ -33,7 +29,7 @@ export const getProductsId = async (id: number) => {
 
 export const createProducts = async ({nome_produto, valor_produto, id_categoria_produto} : ProdutoDTO) => {
   try {
-    const response = await axios.post(`http://127.0.0.1:8000/api/produtos`, {
+    const response = await axios.post(`${BASE_URL}produtos`, {
       nome_produto: nome_produto,
       valor_produto: valor_produto,
       id_categoria_produto: id_categoria_produto
@@ -47,7 +43,7 @@ export const createProducts = async ({nome_produto, valor_produto, id_categoria_
 
 export const updateProducts = async ({nome_produto, valor_produto, id_categoria_produto, id} : ProdutoDTO) => {
   try {
-    const response = await axios.put(`http://127.0.0.1:8000/api/produtos/${id}`, {
+    const response = await axios.put(`${BASE_URL}produtos/${id}`, {
       nome_produto: nome_produto,
       valor_produto: valor_produto,
       id_categoria_produto: id_categoria_produto
@@ -62,7 +58,7 @@ export const updateProducts = async ({nome_produto, valor_produto, id_categoria_
 
 export const deleteProducts = async (id: number) => {
   try {
-    const response = await axios.delete(`http://127.0.0.1:8000/api/produtos/${id}`)
+    const response = await axios.delete(`${BASE_URL}produtos/${id}`)
 
     return response.data
   } catch (error) {

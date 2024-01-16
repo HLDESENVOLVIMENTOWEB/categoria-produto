@@ -1,14 +1,11 @@
 import axios from 'axios'
+import { BASE_URL } from 'src/configs/api'
+import { CategoriaDTO } from 'src/types'
 
-
-interface CategoriaDTO {
-  nome_categoria: string
-  id?: number
-}
 
 export const getCategoryProducts = async () => {
   try {
-    const response = await axios.get(`http://127.0.0.1:8000/api/categoria-produtos`)
+    const response = await axios.get(`${BASE_URL}categoria-produtos`)
 
     return response.data
   } catch (error) {
@@ -18,7 +15,7 @@ export const getCategoryProducts = async () => {
 
 export const getCategoryProductsId = async (id: number) => {
   try {
-    const response = await axios.get(`http://127.0.0.1:8000/api/categoria-produtos/${id}`)
+    const response = await axios.get(`${BASE_URL}categoria-produtos/${id}`)
 
     return response.data
   } catch (error) {
@@ -30,7 +27,7 @@ export const getCategoryProductsId = async (id: number) => {
 
 export const createCategoryProtucts = async ({nome_categoria }:CategoriaDTO) => {
   try {
-    const response = await axios.post(`http://127.0.0.1:8000/api/categoria-produtos`,{
+    const response = await axios.post(`${BASE_URL}categoria-produtos`,{
       nome_categoria: nome_categoria
     })
 
@@ -43,7 +40,7 @@ export const createCategoryProtucts = async ({nome_categoria }:CategoriaDTO) => 
 
 export const updateCategoryProtucts = async ({nome_categoria, id }:CategoriaDTO) => {
   try {
-    const response = await axios.put(`http://127.0.0.1:8000/api/categoria-produtos/${id}`,{
+    const response = await axios.put(`${BASE_URL}categoria-produtos/${id}`,{
       nome_categoria: nome_categoria
     })
 
@@ -56,7 +53,7 @@ export const updateCategoryProtucts = async ({nome_categoria, id }:CategoriaDTO)
 
 export const deleteCategoryProducts = async (id: number) => {
   try {
-    const response = await axios.delete(`http://127.0.0.1:8000/api/categoria-produtos/${id}`)
+    const response = await axios.delete(`${BASE_URL}categoria-produtos/${id}`)
 
     return response.data
   } catch (error) {
