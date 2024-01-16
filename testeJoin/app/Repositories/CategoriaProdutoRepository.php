@@ -4,6 +4,9 @@
 
 namespace App\Repositories;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Exception;
+
 use App\Models\CategoriaProduto;
 use App\Repositories\Contracts\CategoriaProdutoRepositoryInterface;
 use Illuminate\Support\Collection;
@@ -27,17 +30,32 @@ class CategoriaProdutoRepository implements CategoriaProdutoRepositoryInterface
 
     public function update($id, array $data): CategoriaProduto
     {
-        $categoriaProduto = CategoriaProduto::where('id_categoria_planejameto', $id)->first();
-        $categoriaProduto->nome_categoria = 'New Name';
-        return $categoriaProduto->save();
+        $categoria = CategoriaProduto::find($id);
 
+        if (!$categoria) {
+            throw new ModelNotFoundException('Produto not found.');
+        }
+
+        $categoria->update($data);
+
+        return $categoria;
     }
 
     public function delete($id): bool
     {
 
-        $categoriaProduto = CategoriaProduto::where('id_categoria_planejameto', $id)->first();
+        $categoriaProduto = CategoriaProduto::find($id); // Now $id refers to 'id_categoria_planejamento'
 
-        return $categoriaProduto->delete();
+        if (count($categoriaProduto->produtos) > 0) {
+            Log::info("Attempt to delete CategoriaProduto with linked products", ['id' => $id]);
+            throw new Exception('Existem produtos linkados a esta categoria.');
+        }
+
+        if ($categoriaProduto) {
+          return  $categoriaProduto->delete();
+            // Optionally handle related data here, if necessary
+        } else {
+            throw new ModelNotFoundException('Produto not found.');
+        }
     }
 }

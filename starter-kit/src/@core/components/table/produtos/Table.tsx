@@ -16,6 +16,11 @@ interface Item {
   nome_produto: string
   valor_produto: string
   id_categoria_produto: number
+  categoria_produto: CategoriaDTO
+}
+
+interface CategoriaDTO {
+  nome_categoria: string
 }
 interface TableProps {
   data: Item[]
@@ -30,6 +35,7 @@ function TableProdutos({ data, setLoaging }: TableProps) {
         <TableRow>
           <TableCell>Nome da produto</TableCell>
           <TableCell>Valor do produto</TableCell>
+          <TableCell>Categoria</TableCell>
           <TableCell>Editar</TableCell>
           <TableCell>Deletar</TableCell>
         </TableRow>
@@ -45,6 +51,9 @@ function TableProdutos({ data, setLoaging }: TableProps) {
             </TableCell>
             <TableCell component="th" scope="row">
               {row.valor_produto}
+            </TableCell>
+            <TableCell component="th" scope="row">
+              {row.categoria_produto.nome_categoria}
             </TableCell>
             <TableCell><FormModalEditarProduto  id={row.id} setLoaging={setLoaging}/></TableCell>
             <TableCell><FormModalProdutoDelete id={row.id} setLoaging={setLoaging} /></TableCell>

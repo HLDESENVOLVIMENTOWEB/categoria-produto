@@ -33,11 +33,10 @@ class CategoriaProdutoService
         return $this->categoriaProdutoRepository->create($data);
     }
 
-    public function update(array $data): CategoriaProduto
+    public function update($id, array $data): CategoriaProduto
     {
         // Perform any business logic or data manipulation here
-        $this->categoriaProdutoRepository->update($data);
-        return $categoriaProduto;
+        return $this->categoriaProdutoRepository->update($id, $data);
     }
 
     public function delete($id): bool

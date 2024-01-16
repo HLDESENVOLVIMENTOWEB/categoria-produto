@@ -48,7 +48,6 @@ class CategoriaProdutoController extends Controller
     {
         $validatedData = $request->validate([
             'nome_categoria' => 'required|max:150',
-            // Other validation rules
         ]);
 
         $categoria = $this->categoriaProdutoService->update($id, $validatedData);

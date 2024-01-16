@@ -37,8 +37,7 @@ class ProdutoService
     public function update(array $data, $id): Produto
     {
         // Perform any business logic or data manipulation here
-        $this->produtoRepository->update($data, $id);
-        return $produto;
+        return $this->produtoRepository->update($data, $id);
     }
 
     public function delete($id): bool

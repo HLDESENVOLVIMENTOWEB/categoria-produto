@@ -12,6 +12,9 @@ class CategoriaProduto extends Model
      *
      * @var array
      */
+
+     protected $primaryKey = 'id_categoria_planejameto';
+
     protected $fillable = [
         'id_categoria_planejameto',
         'nome_categoria'
