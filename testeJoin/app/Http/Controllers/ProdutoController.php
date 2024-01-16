@@ -38,9 +38,10 @@ class ProdutoController extends Controller
         $validatedData = $request->validate([
             'nome_produto' => 'required|max:150',
             'valor_produto' => 'required|numeric',
-            'data_cadastro' => 'required',
             'id_categoria_produto' => 'required',
         ]);
+
+        $validatedData['data_cadastro'] = new \DateTime();
 
         $produto = $this->produtoService->create($validatedData);
         return response()->json($produto, 201); // 201 Created
@@ -51,9 +52,10 @@ class ProdutoController extends Controller
         $validatedData = $request->validate([
             'nome_produto' => 'required|max:150',
             'valor_produto' => 'required|numeric',
-            'data_cadastro' => 'required',
             'id_categoria_produto' => 'required',
         ]);
+
+        $validatedData['data_cadastro'] = new \DateTime();
 
 
         $produto = $this->produtoService->update($validatedData, $id);

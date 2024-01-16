@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import { Modal, Box, Button, TextField, Typography } from '@mui/material';
+import { getCategoryProductsId, updateCategoryProtucts } from 'src/services/CategoryProductService';
 
 
 const modalStyle = {
@@ -13,17 +14,41 @@ const modalStyle = {
   p: 4,
 };
 
+interface FormModalEditarCategoriaDTO {
+  id: number
+  setLoaging: any
+}
 
-const FormModalEditarCategoria = () => {
+const FormModalEditarCategoria = ({ id, setLoaging }:FormModalEditarCategoriaDTO) => {
   const [open, setOpen] = useState(false);
+  const [nome_categoria, setNomeCategoria] = useState('');
+
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    console.log('Form submitted');
+    updateCategoryProtucts({nome_categoria, id })
+    setLoaging(true)
     handleClose();
   };
+
+
+  useEffect(() => {
+    async function fetchData(id: number) {
+      try {
+        const data = await getCategoryProductsId(id)
+        setNomeCategoria(data?.nome_categoria)
+      } catch (error) {
+        console.error('Error fetching products:', error)
+      }
+    }
+
+    fetchData(id)
+  }, [id])
+
+
+
 
   return (
     <div>
@@ -42,6 +67,8 @@ const FormModalEditarCategoria = () => {
             margin="normal"
             label="Nome da categoria"
             type="text"
+            value={nome_categoria}
+            onChange={(e) => setNomeCategoria(e.target.value)}
             required
           />
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 2 }} >

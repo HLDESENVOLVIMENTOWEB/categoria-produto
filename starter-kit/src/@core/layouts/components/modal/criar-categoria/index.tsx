@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Box, Button, TextField, Typography } from '@mui/material';
+import { createCategoryProtucts } from 'src/services/CategoryProductService';
 
 
 const modalStyle = {
@@ -25,10 +26,10 @@ const FormModal = ({setLoaging}:FormModalDTO) => {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
-    console.log('Form submitted', nome_categoria);
     setLoaging(true)
+    await createCategoryProtucts({nome_categoria})
     handleClose();
   };
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Box, Button, Typography } from '@mui/material';
+import { deleteCategoryProducts } from 'src/services/CategoryProductService';
 
 
 const modalStyle = {
@@ -14,14 +15,20 @@ const modalStyle = {
 };
 
 
-const FormModalCategoriaDelete = () => {
+interface FormModalCategoriaDeleteDTO {
+  id: number
+  setLoaging: any
+}
+
+const FormModalCategoriaDelete = ({id, setLoaging}: FormModalCategoriaDeleteDTO) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    console.log('Form submitted');
+    setLoaging(true)
+    deleteCategoryProducts(id)
     handleClose();
   };
 

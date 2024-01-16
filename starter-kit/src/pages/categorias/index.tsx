@@ -7,6 +7,7 @@ import CardContent from '@mui/material/CardContent'
 import { getCategoryProducts } from 'src/services/CategoryProductService'
 import TableCategoria from 'src/@core/components/table/categorias/Table'
 import FormModal from 'src/@core/layouts/components/modal/criar-categoria'
+import FallbackSpinner from 'src/@core/components/spinner'
 
 const Categorias = () => {
   const [categories, setCategories] = useState([])
@@ -17,6 +18,7 @@ const Categorias = () => {
       try {
         const data = await getCategoryProducts()
         setCategories(data)
+        setLoaging(false)
       } catch (error) {
         console.error('Error fetching products:', error)
       }
@@ -38,7 +40,12 @@ const Categorias = () => {
                 <FormModal setLoaging={setLoaging}/>
               </Grid>
             </Grid>
-            <TableCategoria data={categories} />
+            {
+              loading ?
+              <FallbackSpinner />
+              :    <TableCategoria setLoaging={setLoaging} data={categories} />
+            }
+
           </CardContent>
         </Card>
       </Grid>

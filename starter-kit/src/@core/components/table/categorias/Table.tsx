@@ -17,9 +17,10 @@ interface Item {
 
 interface TableProps {
   data: Item[]
+  setLoaging: any
 }
 
-function TableCategoria({ data }: TableProps) {
+function TableCategoria({ data, setLoaging }: TableProps) {
 
 
   return (
@@ -41,8 +42,8 @@ function TableCategoria({ data }: TableProps) {
               <TableCell component="th" scope="row">
                 {row.nome_categoria}
               </TableCell>
-              <TableCell><FormModalEditarCategoria /></TableCell>
-              <TableCell><FormModalCategoriaDelete /></TableCell>
+              <TableCell><FormModalEditarCategoria id={row.id_categoria_planejameto} setLoaging={setLoaging}  /></TableCell>
+              <TableCell><FormModalCategoriaDelete setLoaging={setLoaging} id={row.id_categoria_planejameto} /></TableCell>
             </TableRow>
           ))}
         </TableBody>

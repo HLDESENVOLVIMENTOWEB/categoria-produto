@@ -19,9 +19,10 @@ interface Item {
 }
 interface TableProps {
   data: Item[]
+  setLoaging: any
 }
 
-function TableProdutos({ data }: TableProps) {
+function TableProdutos({ data, setLoaging }: TableProps) {
   return (
     <TableContainer component={Paper}>
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -45,8 +46,8 @@ function TableProdutos({ data }: TableProps) {
             <TableCell component="th" scope="row">
               {row.valor_produto}
             </TableCell>
-            <TableCell><FormModalEditarProduto /></TableCell>
-            <TableCell><FormModalProdutoDelete /></TableCell>
+            <TableCell><FormModalEditarProduto  id={row.id} setLoaging={setLoaging}/></TableCell>
+            <TableCell><FormModalProdutoDelete id={row.id} setLoaging={setLoaging} /></TableCell>
           </TableRow>
         ))}
       </TableBody>

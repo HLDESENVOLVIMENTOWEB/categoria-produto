@@ -18,6 +18,7 @@ const Produtos = () => {
       try {
         const data = await getProducts()
         setProducts(data)
+        setLoaging(false)
       } catch (error) {
         console.error('Error fetching products:', error)
       }
@@ -39,7 +40,7 @@ const Produtos = () => {
                 <FormModalProduto setLoaging={setLoaging} />
               </Grid>
             </Grid>
-            <TableProdutos data={products} />
+            <TableProdutos data={products} setLoaging={setLoaging} />
           </CardContent>
         </Card>
       </Grid>

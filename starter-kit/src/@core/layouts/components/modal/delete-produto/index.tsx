@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Box, Button, Typography } from '@mui/material';
-
+import { deleteProducts } from 'src/services/ProductService';
 
 const modalStyle = {
   position: 'absolute',
@@ -13,15 +13,21 @@ const modalStyle = {
   p: 4,
 };
 
+interface FormModalProdutoDeleteDTO {
+  id: number
+  setLoaging: any
+}
 
-const FormModalProdutoDelete = () => {
+const FormModalProdutoDelete = ({id, setLoaging }: FormModalProdutoDeleteDTO) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    console.log('Form submitted');
+    setLoaging(false)
+    deleteProducts(id)
+    setLoaging(true)
     handleClose();
   };
 

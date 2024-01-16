@@ -28,9 +28,11 @@ class ProdutoRepository implements ProdutoRepositoryInterface
     public function update(array $data, $id): Produto
     {
         $produto = Produto::find($id);
-        $produto->name = 'New Name';
-        $produto->email = 'newemail@example.com';
-        return $user->save();
+        $produto->nome_produto = $data['nome_produto'];
+        $produto->valor_produto = $data['valor_produto'];
+        $produto->id_categoria_produto = $data['id_categoria_produto'];
+        $produto->data_cadastro = $data['data_cadastro'];
+        return $produto->save();
 
     }
 

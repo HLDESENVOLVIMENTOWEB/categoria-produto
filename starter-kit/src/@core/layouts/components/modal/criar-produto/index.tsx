@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { Modal, Box, Button, TextField, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Modal, Box, Button, TextField, Typography, FormControl, MenuItem, Select, InputLabel } from '@mui/material';
+import { createProducts } from 'src/services/ProductService';
+import { getCategoryProducts } from 'src/services/CategoryProductService';
 
 
 const modalStyle = {
@@ -21,20 +23,40 @@ interface FormModalDTO {
 const FormModalProduto = ({setLoaging}:FormModalDTO) => {
   const [open, setOpen] = useState(false);
 
+  const [categories, setCategories] = useState([]);
+
   const [nome_produto, setNomeProduto] = useState('');
   const [valor_produto, setValorProduto] = useState('');
-  const [id_categoria_produto, setidCateogoriaProduto] = useState('');
-  const [data_cadastro, setDataCadastro] = useState('');
+  const [id_categoria_produto, setidCateogoriaProduto] = useState<number>();
 
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
-    console.log('Form submitted', { nome_produto, valor_produto, id_categoria_produto,  data_cadastro });
-    setLoaging(true)
+    await createProducts({ nome_produto, valor_produto, id_categoria_produto })
+    setLoaging(true);
     handleClose();
   };
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await getCategoryProducts()
+        setCategories(data)
+      } catch (error) {
+        console.error('Error fetching products:', error)
+      }
+    }
+
+    fetchData()
+  }, [])
+
+    const handleChange = (event: any) => {
+      console.log(event.target.value)
+      setidCateogoriaProduto(event.target.value);
+  };
+
 
   return (
     <div>
@@ -67,25 +89,23 @@ const FormModalProduto = ({setLoaging}:FormModalDTO) => {
             required
           />
 
-         <TextField
-            fullWidth
-            margin="normal"
-            label="id_categoria_produto"
-            type="text"
-            value={id_categoria_produto}
-            onChange={(e) => setidCateogoriaProduto(e.target.value)}
-            required
-          />
 
-          <TextField
-            fullWidth
-            margin="normal"
-            label="data_cadastro"
-            type="text"
-            value={data_cadastro}
-            onChange={(e) => setDataCadastro(e.target.value)}
-            required
-          />
+        <FormControl fullWidth>
+          <InputLabel id="id_categoria_produto-label">Categoria</InputLabel>
+          <Select
+            labelId="id_categoria_produto-label"
+            id="id_categoria_produto"
+            value={id_categoria_produto}
+            label="Age"
+            onChange={handleChange}
+          >
+            {
+              categories.length > 0 &&
+              // eslint-disable-next-line react/jsx-key
+              categories.map((i:any ) => <MenuItem value={i.id_categoria_planejameto}>{i.nome_categoria}</MenuItem>)
+             }
+          </Select>
+        </FormControl>
 
 
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 2 }}>
