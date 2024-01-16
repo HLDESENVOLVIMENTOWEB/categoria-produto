@@ -18,9 +18,11 @@ const modalStyle = {
 interface FormModalCategoriaDeleteDTO {
   id: number
   setLoaging: any
+  setShowSuccessAlert: any
+  setShowErrorAlert: any
 }
 
-const FormModalCategoriaDelete = ({id, setLoaging}: FormModalCategoriaDeleteDTO) => {
+const FormModalCategoriaDelete = ({id, setLoaging, setShowSuccessAlert, setShowErrorAlert}: FormModalCategoriaDeleteDTO) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -28,7 +30,28 @@ const FormModalCategoriaDelete = ({id, setLoaging}: FormModalCategoriaDeleteDTO)
   const handleSubmit = (event: any) => {
     event.preventDefault();
     setLoaging(true)
-    deleteCategoryProducts(id)
+    try {
+      deleteCategoryProducts(id)
+      setShowSuccessAlert({
+        status: true,
+        msg: 'deletado com sucesso'
+      })
+      setTimeout(() => setShowSuccessAlert({
+        status: false,
+        msg: ''
+      }), 3000);
+    } catch (error) {
+      setShowErrorAlert({
+        status: true,
+        msg: 'Error ao deletar prodtuo ou existe produto relacionado a essa categoria'
+      });
+      setTimeout(() => setShowErrorAlert({
+        status: false,
+        msg: ''
+      }), 3000);
+    }
+
+    setLoaging(true)
     handleClose();
   };
 

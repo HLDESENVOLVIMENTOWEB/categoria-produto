@@ -18,9 +18,10 @@ interface Item {
 interface TableProps {
   data: Item[]
   setLoaging: any
+  setShowSuccessAlert: any
 }
 
-function TableCategoria({ data, setLoaging }: TableProps) {
+function TableCategoria({ data, setLoaging, setShowSuccessAlert }: TableProps) {
 
 
   return (
@@ -42,8 +43,8 @@ function TableCategoria({ data, setLoaging }: TableProps) {
               <TableCell component="th" scope="row">
                 {row.nome_categoria}
               </TableCell>
-              <TableCell><FormModalEditarCategoria id={row.id_categoria_planejameto} setLoaging={setLoaging}  /></TableCell>
-              <TableCell><FormModalCategoriaDelete setLoaging={setLoaging} id={row.id_categoria_planejameto} /></TableCell>
+              <TableCell><FormModalEditarCategoria setShowSuccessAlert={setShowSuccessAlert} id={row.id_categoria_planejameto} setLoaging={setLoaging}  /></TableCell>
+              <TableCell><FormModalCategoriaDelete setShowSuccessAlert={setShowSuccessAlert} setLoaging={setLoaging} id={row.id_categoria_planejameto} /></TableCell>
             </TableRow>
           ))}
         </TableBody>

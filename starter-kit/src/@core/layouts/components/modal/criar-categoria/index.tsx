@@ -17,21 +17,47 @@ const modalStyle = {
 
 interface FormModalDTO {
   setLoaging: any;
+  setShowSuccessAlert: any;
+  setShowErrorAlert: any
 }
 
-const FormModal = ({setLoaging}:FormModalDTO) => {
+const FormModal = ({setLoaging, setShowSuccessAlert, setShowErrorAlert}:FormModalDTO) => {
   const [open, setOpen] = useState(false);
+
+
 
   const [nome_categoria, setNomeCategoria] = useState('');
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleSubmit = async (event: any) => {
-    event.preventDefault();
-    setLoaging(true)
-    await createCategoryProtucts({nome_categoria})
+    await  setLoaging(true)
+    try {
+      await createCategoryProtucts({nome_categoria})
+      event.preventDefault();
+      setShowSuccessAlert({
+        status: true,
+        msg: 'Cadastrado com sucesso'
+      });
+      setTimeout(() => setShowSuccessAlert({
+        status: false,
+        msg: ''
+      }), 3000);
+    } catch (error) {
+      setShowErrorAlert({
+        status: true,
+        msg: 'Error ao criar categoria'
+      });
+      setTimeout(() => setShowErrorAlert({
+        status: false,
+        msg: ''
+      }), 3000);
+    }
     handleClose();
   };
+
+
+
 
   return (
     <div>

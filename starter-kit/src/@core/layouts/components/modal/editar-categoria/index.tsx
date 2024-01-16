@@ -17,9 +17,11 @@ const modalStyle = {
 interface FormModalEditarCategoriaDTO {
   id: number
   setLoaging: any
+  setShowSuccessAlert: any
+  setShowErrorAlert: any
 }
 
-const FormModalEditarCategoria = ({ id, setLoaging }:FormModalEditarCategoriaDTO) => {
+const FormModalEditarCategoria = ({ id, setLoaging, setShowSuccessAlert, setShowErrorAlert }:FormModalEditarCategoriaDTO) => {
   const [open, setOpen] = useState(false);
   const [nome_categoria, setNomeCategoria] = useState('');
 
@@ -28,7 +30,27 @@ const FormModalEditarCategoria = ({ id, setLoaging }:FormModalEditarCategoriaDTO
   const handleClose = () => setOpen(false);
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    updateCategoryProtucts({nome_categoria, id })
+    try {
+      updateCategoryProtucts({nome_categoria, id })
+      setShowSuccessAlert({
+        status: true,
+        msg: 'Alterado com sucesso'
+      })
+      setTimeout(() => setShowSuccessAlert({
+        status: false,
+        msg: ''
+    }), 3000);
+    } catch (error) {
+      setShowErrorAlert({
+        status: true,
+        msg: 'Error ao alterar categoria'
+      });
+      setTimeout(() => setShowErrorAlert({
+        status: false,
+        msg: ''
+      }), 3000);
+    }
+    setLoaging(true)
     setLoaging(true)
     handleClose();
   };

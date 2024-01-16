@@ -16,9 +16,11 @@ const modalStyle = {
 interface FormModalProdutoDeleteDTO {
   id: number
   setLoaging: any
+  setShowSuccessAlert: any
+  setShowErrorAlert: any
 }
 
-const FormModalProdutoDelete = ({id, setLoaging }: FormModalProdutoDeleteDTO) => {
+const FormModalProdutoDelete = ({id, setLoaging, setShowSuccessAlert, setShowErrorAlert }: FormModalProdutoDeleteDTO) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -26,7 +28,29 @@ const FormModalProdutoDelete = ({id, setLoaging }: FormModalProdutoDeleteDTO) =>
   const handleSubmit = (event: any) => {
     event.preventDefault();
     setLoaging(false)
-    deleteProducts(id)
+    try {
+
+      deleteProducts(id)
+      setShowSuccessAlert({
+        status: true,
+        msg: 'Deletado com sucesso'
+      });
+      setTimeout(() => setShowSuccessAlert({
+        status: false,
+        msg: ''
+      }), 3000);
+
+    } catch (error) {
+      setShowErrorAlert({
+        status: true,
+        msg: 'Error ao deletar prodtuo'
+      });
+      setTimeout(() => setShowErrorAlert({
+        status: false,
+        msg: ''
+      }), 3000);
+    }
+
     setLoaging(true)
     handleClose();
   };

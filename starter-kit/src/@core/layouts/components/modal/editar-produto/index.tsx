@@ -18,10 +18,12 @@ const modalStyle = {
 interface FormModalEditarProdutoDTO {
   id: number
   setLoaging: any
+  setShowSuccessAlert: any
+  setShowErrorAlert: any
 }
 
 
-const FormModalEditarProduto = ({ id, setLoaging }:FormModalEditarProdutoDTO) => {
+const FormModalEditarProduto = ({ id, setLoaging, setShowSuccessAlert, setShowErrorAlert }:FormModalEditarProdutoDTO) => {
   const [open, setOpen] = useState(false);
 
   const [nome_produto, setNomeProduto] = useState('');
@@ -34,7 +36,26 @@ const FormModalEditarProduto = ({ id, setLoaging }:FormModalEditarProdutoDTO) =>
   const handleClose = () => setOpen(false);
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    updateProducts({nome_produto, valor_produto, id_categoria_produto, id })
+    try {
+      updateProducts({nome_produto, valor_produto, id_categoria_produto, id })
+      setShowSuccessAlert({
+        status: true,
+        msg: 'Alterado com sucesso'
+      });
+      setTimeout(() => setShowSuccessAlert({
+        status: false,
+        msg: ''
+      }), 3000);
+    } catch (error) {
+      setShowErrorAlert({
+        status: true,
+        msg: 'Error ao alterar produto'
+      });
+      setTimeout(() => setShowErrorAlert({
+        status: false,
+        msg: ''
+      }), 3000);
+    }
     setLoaging(true)
     handleClose();
   };

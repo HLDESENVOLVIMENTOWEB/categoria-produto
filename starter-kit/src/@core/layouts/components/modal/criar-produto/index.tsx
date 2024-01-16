@@ -17,10 +17,12 @@ const modalStyle = {
 
 interface FormModalDTO {
   setLoaging: any;
+  setShowSuccessAlert: any;
+  setShowErrorAlert: any;
 }
 
 
-const FormModalProduto = ({setLoaging}:FormModalDTO) => {
+const FormModalProduto = ({setLoaging, setShowSuccessAlert, setShowErrorAlert}:FormModalDTO) => {
   const [open, setOpen] = useState(false);
 
   const [categories, setCategories] = useState([]);
@@ -34,7 +36,26 @@ const FormModalProduto = ({setLoaging}:FormModalDTO) => {
   const handleClose = () => setOpen(false);
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    await createProducts({ nome_produto, valor_produto, id_categoria_produto })
+    try {
+      await createProducts({ nome_produto, valor_produto, id_categoria_produto })
+      setShowSuccessAlert({
+        status: true,
+        msg: 'Cadastrado com sucesso'
+      });
+      setTimeout(() => setShowSuccessAlert({
+        status: false,
+        msg: ''
+      }), 3000);
+    } catch (error) {
+      setShowErrorAlert({
+        status: true,
+        msg: 'Error ao criar produto'
+      });
+      setTimeout(() => setShowErrorAlert({
+        status: false,
+        msg: ''
+      }), 3000);
+    }
     setLoaging(true);
     handleClose();
   };

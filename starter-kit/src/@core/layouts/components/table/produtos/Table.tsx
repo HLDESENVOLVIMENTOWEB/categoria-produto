@@ -25,9 +25,10 @@ interface CategoriaDTO {
 interface TableProps {
   data: Item[]
   setLoaging: any
+  setShowSuccessAlert: any
 }
 
-function TableProdutos({ data, setLoaging }: TableProps) {
+function TableProdutos({ data, setLoaging, setShowSuccessAlert }: TableProps) {
   return (
     <TableContainer component={Paper}>
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -55,8 +56,8 @@ function TableProdutos({ data, setLoaging }: TableProps) {
             <TableCell component="th" scope="row">
               {row.categoria_produto.nome_categoria}
             </TableCell>
-            <TableCell><FormModalEditarProduto  id={row.id} setLoaging={setLoaging}/></TableCell>
-            <TableCell><FormModalProdutoDelete id={row.id} setLoaging={setLoaging} /></TableCell>
+            <TableCell><FormModalEditarProduto setShowSuccessAlert={setShowSuccessAlert}  id={row.id} setLoaging={setLoaging}/></TableCell>
+            <TableCell><FormModalProdutoDelete setShowSuccessAlert={setShowSuccessAlert} id={row.id} setLoaging={setLoaging} /></TableCell>
           </TableRow>
         ))}
       </TableBody>
